@@ -13,32 +13,24 @@ st.title("SCI: Social Connectedness Index")
 
 server_url = st.secrets["tableau"]["server_url"].rstrip("/")
 site_id = st.secrets["tableau"]["site_id"]
+token_name = st.secrets["tableau"]["token_name"]
+token_value = st.secrets["tableau"]["personal_access_token"]
 workbook_name = "SCI"
 view_name = "Dashboard 1"
 
-# Format: https://server/t/site/views/workbook/view
-tableau_url = f"{server_url}/t/{site_id}/views/{workbook_name}/{view_name.replace(' ', '')}"
+# Format for trusted authentication
+# :embed=yes&:toolbar=no adds parameters to avoid login and customize display
+trusted_tableau_url = f"{server_url}/t/{site_id}/views/{workbook_name}/{view_name.replace(' ', '')}?:embed=yes&:toolbar=yes&:tabs=no&:token_type=personal_access_token&:token_name={token_name}&:token_value={token_value}"
 
+# Use iframe for simpler embedding with authentication tokens in URL
 tableau_embed_html = f"""
 <div style='width: 100%; height: 800px;'>
-    <script type='text/javascript' src='https://public.tableau.com/javascripts/api/tableau-2.min.js'></script>
-    <div id='vizContainer' style='width: 100%; height: 100%;'></div>
-    <script type='text/javascript'>
-        function initViz() {{
-            const containerDiv = document.getElementById('vizContainer');
-            const vizUrl = '{tableau_url}';
-            const options = {{
-                hideTabs: true,
-                hideToolbar: false,
-                width: '100%',
-                height: '100%'
-            }};
-            
-            new tableau.Viz(containerDiv, vizUrl, options);
-        }}
-        
-        document.addEventListener('DOMContentLoaded', initViz);
-    </script>
+    <iframe src="{trusted_tableau_url}" 
+            frameborder="0" 
+            width="100%" 
+            height="100%" 
+            allowfullscreen>
+    </iframe>
 </div>
 """
 
