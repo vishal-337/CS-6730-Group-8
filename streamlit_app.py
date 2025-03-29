@@ -1,15 +1,26 @@
+#%% Imports
+
 import streamlit as st
 import tableauserverclient as TSC
 import streamlit.components.v1 as components
 
-# Set page configuration
+from src.world_map import create_world_map, create_custom_map
+from src.mpi import MessagePassing
+from streamlit_plotly_events import plotly_events
+import pandas as pd
+import time
+import random
+import plotly.express as px
+
+
+#%% Page Config
 st.set_page_config(
     page_title="Ties That Bind",
     page_icon="🌐",
     layout="wide"
 )
 
-# Main title
+#%% Main title and Intro
 st.markdown("<h1 style='text-align: center;'>Ties That Bind: A Visual Exploration of Human Connection</h1>", unsafe_allow_html=True)
 
 st.markdown("""
@@ -34,6 +45,9 @@ SCI may show us how connected people are geographically, however SCI data has br
 """)
 
 st.markdown("---")
+
+
+#%% Tableau Connection
 
 # Set up connection to Tableau
 tableau_auth = TSC.PersonalAccessTokenAuth(
@@ -108,4 +122,46 @@ with st.expander("About SCI"):
     st.write("""
     The Social Connectedness Index (SCI) measures the strength of connectedness between 
     geographic areas as represented by social network friendships.
-    """) 
+    """)
+
+#%% Message Passing
+
+with st.expander("Message Passing Simulator"):
+    st.write("Select a Country and see how it plays role in connecting the world")
+
+
+    mpi = MessagePassing()
+    activation_threshold = 1
+    passing_probability = 0.1
+    time_steps = 100
+
+    st.session_state.mpi_df = pd.DataFrame({
+        'country': mpi.countries_input,
+        'value': [0] * len(mpi.countries_input)
+    })
+
+    fig = create_world_map()
+    selected_points = plotly_events(fig, click_event=True)
+    map_placeholder = st.empty()
+
+    if selected_points:
+        selected_country = selected_points[0].get('location')
+        st.write("Selected country:", selected_country)
+        
+        if selected_country in st.session_state.mpi_df['country'].values:
+            activations = mpi.get_timestep_activations(selected_country="United States",ts=time_steps,pp=passing_probability,at=activation_threshold)
+            for timestep in range(time_steps):
+                st.session_state.mpi_df.loc[st.session_state.mpi_df['country'] == selected_country, 'value'] += 1
+                updated_fig = create_custom_map(st.session_state.mpi_df)
+                map_placeholder.plotly_chart(updated_fig, use_container_width=True)
+                time.sleep(0.1)
+            st.write(f"Simulation complete for {selected_country}.")
+        else:
+            st.error("Selected country not found in the data.")
+    else:
+        st.plotly_chart(fig, use_container_width=True)
+        st.write("Click on a country to start the simulation.")
+
+
+
+#%%
