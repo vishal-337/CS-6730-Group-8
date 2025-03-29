@@ -4,13 +4,36 @@ import streamlit.components.v1 as components
 
 # Set page configuration
 st.set_page_config(
-    page_title="SCI: Social Connectedness Index",
+    page_title="Ties That Bind",
     page_icon="🌐",
     layout="wide"
 )
 
 # Main title
-st.title("SCI: Social Connectedness Index")
+st.markdown("<h1 style='text-align: center;'>Ties That Bind: A Visual Exploration of Human Connection</h1>", unsafe_allow_html=True)
+
+st.markdown("""
+This project explores how people connect with each other in everyday life. It uses data visualizations to show how we communicate, build relationships, and form economic and social communities. The project looks at different ways to interpret Social Connectedness and its impact on global dynamics.  The goal is to make the idea of the power of  human connection clear and relatable for everyone.
+""")
+
+st.markdown("### What is SCI data?")
+st.markdown("""
+Social Connectedness Index (SCI) is a measure of the social connectedness between different geographies. It measures the relative probability of two different individuals each from a specified geography communicating with each other. The data we propose to use is from Facebook Social Connectedness Index [1]. The data consists of a snapshot of all active Facebook users and their friendship networks, and is defined as follows.
+""")
+
+# Display SCI formula image centered
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    st.image("SCI.png", width=400)
+
+st.markdown("### What SCI can show us?")
+st.markdown("""
+**Significance of SCI**
+
+SCI may show us how connected people are geographically, however SCI data has broader implications spanning across multiple disciplines. SCI data has been shown to correlate to economic factors and disease outbreaks. Other definitions of SCI implicate relationships to political events, policies, immigration etc. Perhaps by exploring compound relationships to other data can provide valuable insight that may not be obvious with a singular dataset alone.
+""")
+
+st.markdown("---")
 
 # Set up connection to Tableau
 tableau_auth = TSC.PersonalAccessTokenAuth(
