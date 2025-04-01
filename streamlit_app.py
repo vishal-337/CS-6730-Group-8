@@ -7,9 +7,10 @@ import random
 import streamlit as st
 import tableauserverclient as TSC
 import streamlit.components.v1 as components
-
-
-
+import sys
+print(sys.path)
+import os
+print(os.path.dirname(os.path.abspath(__file__)))
 from .src.mpi import MessagePassing, mpi_get_data, mpi_select_status, mpi_run_fig, mpi_select_fig
 from streamlit_plotly_events import plotly_events
 import plotly.express as px
