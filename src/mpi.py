@@ -28,12 +28,13 @@ class MessagePassing:
         else:
             self.mode = 'log_sci'
         self.max = self.df[self.mode].max()
+        self.min = self.df[self.mode].min()
 
 
     def get_timestep_activations(self, selected_country, ts, pp, at):
         countries_input = self.countries_input
         df = self.df
-        scaled_sci_map = {(row['user_loc'], row['fr_loc']): row[self.mode]/self.max for _, row in df.iterrows()}
+        scaled_sci_map = {(row['user_loc'], row['fr_loc']): (row[self.mode] - self.min)/(self.max - self.min) for _, row in df.iterrows()}
         act_map = {country: 0 for country in countries_input}
         if selected_country in act_map:
             act_map[selected_country] = at

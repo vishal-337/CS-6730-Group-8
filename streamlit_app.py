@@ -142,6 +142,15 @@ with st.expander("Message Passing Simulator"):
     st.write("Select a country to see how it plays a role in connecting the world.")
     delta_t = 50
     at = 100
+
+    mpi_col1, mpi_col2, mpi_col3 = st.columns(3)
+    with mpi_col1:
+        pp = st.number_input(label="Passing Probability",value=1.0,min_value=0.0,max_value=1.0,step=0.01,format="%.2f")
+    with mpi_col2:
+        ts = st.number_input(label="Enter Timesteps", value=256, min_value=5,max_value=1000,step=1, )
+    with mpi_col3:
+        at = st.number_input(label="Enter Activation Threshold",value=100,min_value=1,max_value=1000,step=1,)
+
     if "mpi_event" not in st.session_state:
         st.session_state.mpi_event = None
     mpi_placeholder = st.empty()
@@ -149,7 +158,7 @@ with st.expander("Message Passing Simulator"):
     if  st.session_state.mpi_event is not None and len(st.session_state.mpi_event['selection']['points']) > 0:
         country =st.session_state.mpi_event['selection']['points'][0]['location']
         st.write("Selected country:", country)
-        df = mpi_get_data(country, at=100, ts=256, pp=1.)
+        df = mpi_get_data(country, at=at, ts=ts, pp=pp)
         fig = mpi_run_fig(df, at, delta_t)
         mpi_placeholder.plotly_chart(fig, use_container_width=True, key="mpi_mode")
 

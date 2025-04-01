@@ -24,7 +24,7 @@ def get_data(country, at = 100,ts = 256,pp = 1.):
         for j, country_code in enumerate(countries):
             row_dict = {
                 'country': country_code, 
-                'value': min(values[i][j],at),
+                'value': values[i][j],
                 'timestep': year
             }
             records.append(row_dict)
@@ -42,10 +42,41 @@ def select_status():
 #%%
 
 delta_t = 50
-at = 100
+
 
 if "mpi_event" not in st.session_state:
     st.session_state.mpi_event = None
+
+mpi_col1, mpi_col2, mpi_col3 = st.columns(3)
+
+with mpi_col1:
+    pp = st.number_input(
+        label="Passing Probability", 
+        value=1.0,           
+        min_value=0.0,       
+        max_value=1.0,   
+        step=0.01,             
+        format="%.2f"        
+    )
+
+with mpi_col2:
+    ts = st.number_input(
+        label="Enter Timesteps", 
+        value=256,          
+        min_value=5,      
+        max_value=1000,    
+        step=1,            
+    )
+
+
+with mpi_col3:
+    at = st.number_input(
+        label="Enter Activation Threshold", 
+        value=100,           
+        min_value=1,       
+        max_value=1000,       
+        step=1,            
+    )
 
 
 
@@ -54,14 +85,14 @@ mpi_placeholder = st.empty()
 if  st.session_state.mpi_event is not None and len(st.session_state.mpi_event['selection']['points']) > 0:
     country =st.session_state.mpi_event['selection']['points'][0]['location']
     st.write("Selected country:", country)
-    df = get_data(country, at=100, ts=256, pp=1.)
+    df = get_data(country, at=at, ts=ts, pp=pp)
     fig = px.choropleth(
         df,
         locations="country",
         locationmode="country names",
         color="value",
         color_continuous_scale="Viridis",
-        range_color=(0, at),
+        range_color=(0, 100),
         hover_name="country",
         animation_frame="timestep",
         title="Message Passing Choropleth"
@@ -90,4 +121,7 @@ else:
 if st.button('Reset'):
     st.session_state.mpi_event = None
     st.rerun()
+
+
+
 # %%
