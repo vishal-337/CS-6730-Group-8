@@ -1,16 +1,19 @@
 #%% Imports
 
+import pandas as pd
+import time
+import random
+
 import streamlit as st
 import tableauserverclient as TSC
 import streamlit.components.v1 as components
 
+
 from src.world_map import create_world_map, create_custom_map
-from src.mpi import MessagePassing
+from src.mpi import MessagePassing, mpi_get_data, mpi_select_status, mpi_run_fig, mpi_select_fig
 from streamlit_plotly_events import plotly_events
-import pandas as pd
-import time
-import random
 import plotly.express as px
+import plotly.graph_objects as go
 
 
 #%% Page Config
@@ -49,6 +52,7 @@ st.markdown("---")
 
 #%% Tableau Connection
 
+comment = '''
 # Set up connection to Tableau
 tableau_auth = TSC.PersonalAccessTokenAuth(
     st.secrets["tableau"]["token_name"],
@@ -124,44 +128,38 @@ with st.expander("About SCI"):
     geographic areas as represented by social network friendships.
     """)
 
+    
+'''
+
+
 #%% Message Passing
 
 with st.expander("Message Passing Simulator"):
-    st.write("Select a Country and see how it plays role in connecting the world")
+    st.write("Select a country to see how it plays a role in connecting the world.")
+    delta_t = 50
+    at = 100
+    if "mpi_event" not in st.session_state:
+        st.session_state.mpi_event = None
+    mpi_placeholder = st.empty()
 
+    if  st.session_state.mpi_event is not None and len(st.session_state.mpi_event['selection']['points']) > 0:
+        country =st.session_state.mpi_event['selection']['points'][0]['location']
+        st.write("Selected country:", country)
+        df = mpi_get_data(country, at=100, ts=256, pp=1.)
+        fig = mpi_run_fig(df, at, delta_t)
+        mpi_placeholder.plotly_chart(fig, use_container_width=True, key="mpi_mode")
 
-    mpi = MessagePassing()
-    activation_threshold = 1
-    passing_probability = 0.1
-    time_steps = 100
-
-    st.session_state.mpi_df = pd.DataFrame({
-        'country': mpi.countries_input,
-        'value': [0] * len(mpi.countries_input)
-    })
-
-    fig = create_world_map()
-    selected_points = plotly_events(fig, click_event=True)
-    map_placeholder = st.empty()
-
-    if selected_points:
-        selected_country = selected_points[0].get('location')
-        st.write("Selected country:", selected_country)
-        
-        if selected_country in st.session_state.mpi_df['country'].values:
-            activations = mpi.get_timestep_activations(selected_country="United States",ts=time_steps,pp=passing_probability,at=activation_threshold)
-            for timestep in range(time_steps):
-                st.session_state.mpi_df.loc[st.session_state.mpi_df['country'] == selected_country, 'value'] += 1
-                updated_fig = create_custom_map(st.session_state.mpi_df)
-                map_placeholder.plotly_chart(updated_fig, use_container_width=True)
-                time.sleep(0.1)
-            st.write(f"Simulation complete for {selected_country}.")
-        else:
-            st.error("Selected country not found in the data.")
     else:
-        st.plotly_chart(fig, use_container_width=True)
-        st.write("Click on a country to start the simulation.")
+        mpi = MessagePassing()
+        fig = mpi_select_fig(mpi.countries_input)
+        st.session_state.mpi_event = mpi_placeholder.plotly_chart(fig, use_container_width=True, on_select=mpi_select_status, key="select_mode")
+        if  len(st.session_state.mpi_event['selection']['points']) > 0:
+            fig.update_traces(selectedpoints=None)
+            st.rerun()
 
 
+    if st.button('Reset'):
+        st.session_state.mpi_event = None
+        st.rerun()
 
 #%%
