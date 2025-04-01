@@ -5,3 +5,4 @@ streamlit
 plotly
 gspread
 oauth2client
+streamlit_plotly_events
