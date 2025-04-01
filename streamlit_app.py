@@ -9,7 +9,6 @@ import tableauserverclient as TSC
 import streamlit.components.v1 as components
 
 
-from src.world_map import create_world_map, create_custom_map
 from src.mpi import MessagePassing, mpi_get_data, mpi_select_status, mpi_run_fig, mpi_select_fig
 from streamlit_plotly_events import plotly_events
 import plotly.express as px
