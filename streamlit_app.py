@@ -53,7 +53,7 @@ st.markdown("---")
 
 #%% Tableau Connection
 
-comment = '''
+
 # Set up connection to Tableau
 tableau_auth = TSC.PersonalAccessTokenAuth(
     st.secrets["tableau"]["token_name"],
@@ -130,11 +130,11 @@ with st.expander("About SCI"):
     """)
 
     
-'''
+
 
 
 #%% Message Passing
-
+'''
 with st.expander("Message Passing Simulator"):
     st.write("Select a country to see how it plays a role in connecting the world.")
     delta_t = 50
@@ -162,5 +162,5 @@ with st.expander("Message Passing Simulator"):
     if st.button('Reset'):
         st.session_state.mpi_event = None
         st.rerun()
-
+'''
 #%%
