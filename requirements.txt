@@ -3,3 +3,5 @@ tableauserverclient>=0.24.0
 pandas>=1.5.0
 streamlit
 plotly
+gspread
+oauth2client
