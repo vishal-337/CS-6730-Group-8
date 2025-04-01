@@ -15,11 +15,9 @@ import plotly.graph_objects as go
 #%%
 
 import sys
-print(sys.path)
 import os
-print(os.path.dirname(os.path.abspath(__file__)))
 st.write(os.path.dirname(os.path.abspath(__file__)))
-st.write(sys.path)
+st.write(os.listdir())
 
 
 #%% Page Config
