@@ -1,4 +1,4 @@
-#%% Imports
+# Imports
 
 import pandas as pd
 import time
@@ -12,7 +12,7 @@ from streamlit_plotly_events import plotly_events
 import plotly.express as px
 import plotly.graph_objects as go
 
-#%%
+#
 
 import sys
 import os
@@ -20,14 +20,15 @@ st.write(os.path.dirname(os.path.abspath(__file__)))
 st.write(os.listdir())
 
 
-#%% Page Config
+# Page Config
+
 st.set_page_config(
     page_title="Ties That Bind",
     page_icon="🌐",
     layout="wide"
 )
 
-#%% Main title and Intro
+# Main title and Intro
 st.markdown("<h1 style='text-align: center;'>Ties That Bind: A Visual Exploration of Human Connection</h1>", unsafe_allow_html=True)
 
 st.markdown("""
@@ -54,7 +55,7 @@ SCI may show us how connected people are geographically, however SCI data has br
 st.markdown("---")
 
 
-#%% Tableau Connection
+# Tableau Connection
 
 
 # Set up connection to Tableau
@@ -136,7 +137,7 @@ with st.expander("About SCI"):
 
 
 
-#%% Message Passing
+# Message Passing
 '''
 with st.expander("Message Passing Simulator"):
     st.write("Select a country to see how it plays a role in connecting the world.")
@@ -166,4 +167,4 @@ with st.expander("Message Passing Simulator"):
         st.session_state.mpi_event = None
         st.rerun()
 '''
-#%%
+#
