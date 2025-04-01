@@ -9,8 +9,8 @@ import tableauserverclient as TSC
 import streamlit.components.v1 as components
 # from .src.mpi import MessagePassing, mpi_get_data, mpi_select_status, mpi_run_fig, mpi_select_fig
 # from streamlit_plotly_events import plotly_events
-# import plotly.express as px
-# import plotly.graph_objects as go
+import plotly.express as px
+import plotly.graph_objects as go
 
 #
 
