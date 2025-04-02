@@ -86,7 +86,7 @@ def mpi_get_data(country, at = 100,ts = 256,pp = 1.):
 def mpi_select_status():
     pass
 
-def mpi_run_fig(df, at, delta_t):
+def mpi_run_fig(df, at, delta_t, projection_choice):
     fig = px.choropleth(
             df,
             locations="country",
@@ -96,21 +96,23 @@ def mpi_run_fig(df, at, delta_t):
             range_color=(0, at),
             hover_name="country",
             animation_frame="timestep",
-            title="Message Passing Choropleth"
+            title="Message Passing Choropleth",
+            projection = projection_choice
         )
 
     fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = delta_t
     fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = delta_t
     return fig
 
-def mpi_select_fig(countries_input):
+def mpi_select_fig(countries_input, projection_choice):
     fig = px.choropleth(
             locations=countries_input,
             color = [0.5 for _ in range(len(countries_input))],
             locationmode="country names",
             color_continuous_scale="Viridis",
             hover_name=countries_input,
-            title="Message Passing Choropleth"
+            title="Message Passing Choropleth",
+            projection = projection_choice
         )
     return fig
 

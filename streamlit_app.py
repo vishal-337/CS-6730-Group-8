@@ -138,41 +138,51 @@ with st.expander("About SCI"):
 
 # Message Passing
 
-with st.expander("Message Passing Simulator"):
-    st.write("Select a country to see how it plays a role in connecting the world.")
-    delta_t = 50
-    at = 100
+# with st.expander("Message Passing Simulator"):
+st.markdown("### Message Passing Simulator")
 
-    mpi_col1, mpi_col2, mpi_col3 = st.columns(3)
-    with mpi_col1:
-        pp = st.number_input(label="Passing Probability",value=1.0,min_value=0.0,max_value=1.0,step=0.01,format="%.2f")
-    with mpi_col2:
-        ts = st.number_input(label="Enter Timesteps", value=256, min_value=5,max_value=1000,step=1, )
-    with mpi_col3:
-        at = st.number_input(label="Enter Activation Threshold",value=100,min_value=1,max_value=1000,step=1,)
+st.write("Select a country to see how it plays a role in connecting the world.")
+delta_t = 50
+at = 100
 
-    if "mpi_event" not in st.session_state:
-        st.session_state.mpi_event = None
-    mpi_placeholder = st.empty()
+mpi_col1, mpi_col2, mpi_col3 = st.columns(3)
+with mpi_col1:
+    pp = st.number_input(label="Passing Probability",value=1.0,min_value=0.0,max_value=1.0,step=0.01,format="%.2f")
+with mpi_col2:
+    ts = st.number_input(label="Enter Timesteps", value=256, min_value=5,max_value=1000,step=1, )
+with mpi_col3:
+    at = st.number_input(label="Enter Activation Threshold",value=100,min_value=1,max_value=1000,step=1,)
 
-    if  st.session_state.mpi_event is not None and len(st.session_state.mpi_event['selection']['points']) > 0:
-        country =st.session_state.mpi_event['selection']['points'][0]['location']
-        st.write("Selected country:", country)
-        df = mpi_get_data(country, at=at, ts=ts, pp=pp)
-        fig = mpi_run_fig(df, at, delta_t)
-        mpi_placeholder.plotly_chart(fig, use_container_width=True, key="mpi_mode")
+projection_ops = ['equirectangular',  'orthographic', 'natural earth', 'conic equidistant', 'stereographic', 'transverse mercator',  'winkel tripel', 'aitoff', 'sinusoidal']
 
-    else:
-        mpi = MessagePassing()
-        fig = mpi_select_fig(mpi.countries_input)
-        st.session_state.mpi_event = mpi_placeholder.plotly_chart(fig, use_container_width=True, on_select=mpi_select_status, key="select_mode")
-        if  len(st.session_state.mpi_event['selection']['points']) > 0:
-            fig.update_traces(selectedpoints=None)
-            st.rerun()
+projection_choice = st.selectbox(
+    label="Pick an option",
+    options=projection_ops
+)
 
 
-    if st.button('Reset'):
-        st.session_state.mpi_event = None
+if "mpi_event" not in st.session_state:
+    st.session_state.mpi_event = None
+mpi_placeholder = st.empty()
+
+if  st.session_state.mpi_event is not None and len(st.session_state.mpi_event['selection']['points']) > 0:
+    country =st.session_state.mpi_event['selection']['points'][0]['location']
+    st.write("Selected country:", country)
+    df = mpi_get_data(country, at=at, ts=ts, pp=pp)
+    fig = mpi_run_fig(df, at, delta_t, projection_choice)
+    mpi_placeholder.plotly_chart(fig, use_container_width=True, key="mpi_mode")
+
+else:
+    mpi = MessagePassing()
+    fig = mpi_select_fig(mpi.countries_input, projection_choice)
+    st.session_state.mpi_event = mpi_placeholder.plotly_chart(fig, use_container_width=True, on_select=mpi_select_status, key="select_mode")
+    if  len(st.session_state.mpi_event['selection']['points']) > 0:
+        fig.update_traces(selectedpoints=None)
         st.rerun()
+
+
+if st.button('Reset'):
+    st.session_state.mpi_event = None
+    st.rerun()
 
 #

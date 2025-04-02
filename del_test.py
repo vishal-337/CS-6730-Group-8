@@ -78,6 +78,12 @@ with mpi_col3:
         step=1,            
     )
 
+projection_ops = ['equirectangular', 'mercator', 'orthographic', 'natural earth', 'kavrayskiy7', 'miller', 'robinson', 'eckert4', 'azimuthal equal area', 'azimuthal equidistant', 'conic equal area', 'conic conformal', 'conic equidistant', 'gnomonic', 'stereographic', 'mollweide', 'hammer', 'transverse mercator', 'albers usa', 'winkel tripel', 'aitoff', 'sinusoidal']
+
+projection_choice = st.selectbox(
+    label="Pick an option",
+    options=projection_ops
+)
 
 
 mpi_placeholder = st.empty()
@@ -95,11 +101,15 @@ if  st.session_state.mpi_event is not None and len(st.session_state.mpi_event['s
         range_color=(0, 100),
         hover_name="country",
         animation_frame="timestep",
-        title="Message Passing Choropleth"
+        title="Message Passing Choropleth",
+        projection = projection_choice
+        # width=1600,height=1600
     )
 
     fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = delta_t
     fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = delta_t
+    # fig.update_layout(width=1400,height=1400,margin=dict(l=0, r=0, t=0, b=0))
+    # fig.update_geos(projection_scale=5.0,center=dict(lat=20, lon=0),fitbounds="locations")
     mpi_placeholder.plotly_chart(fig, use_container_width=True, key="mpi_mode")
 
 else:
@@ -110,8 +120,12 @@ else:
         locationmode="country names",
         color_continuous_scale="Viridis",
         hover_name=mpi.countries_input,
-        title="Message Passing Choropleth"
+        title="Message Passing Choropleth",
+        fitbounds="locations",
+        projection = projection_choice
     )
+    # fig.update_layout(width=1200,height=800,margin=dict(l=0, r=0, t=0, b=0))
+    fig.update_geos(projection_scale=1.2,center=dict(lat=20, lon=0),fitbounds="locations")
     st.session_state.mpi_event = mpi_placeholder.plotly_chart(fig, use_container_width=True, on_select=select_status, key="select_mode")
     if  len(st.session_state.mpi_event['selection']['points']) > 0:
         fig.update_traces(selectedpoints=None)
