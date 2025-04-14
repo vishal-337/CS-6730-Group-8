@@ -6,7 +6,7 @@ import streamlit as st
 @st.cache_data
 def load_data():
     ##copy your path to this file, migration_with_sci_countries.csv
-    df = pd.read_csv('/Users/hamadeid/Desktop/datavis/clean-repo/data/migration_with_sci_countries.csv')
+    df = pd.read_csv('data/migration_with_sci_countries.csv')
     df = df.rename(columns={
         'Origin_ISO': 'origin_iso',
         'Destination_ISO': 'dest_iso',

@@ -24,7 +24,7 @@ full_to_abbrev = {v: k for k, v in state_abbrev.items()}
 @st.cache_data
 def load_data():
     ##update path to migration_with_sci file
-    df = pd.read_csv('/Users/hamadeid/Desktop/datavis/clean-repo/data/migration_with_sci.tsv', sep='\t')  # Adjust path as needed
+    df = pd.read_csv('data/migration_with_sci.tsv', sep='\t')  
     df = df[df['Origin'] != df['Destination']]
     df = df.dropna(subset=['Migration #', 'state_to_state_sci'])
     return df
