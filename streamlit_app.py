@@ -96,7 +96,7 @@ st.markdown("""
 Here in the two graphs we can compare the SCI data for all the US states with the covid data. In the drop down we can change the timings for each month between the period Jan 2020 to Mar 2023. We can also select any of the states to check the SCI connectedness from that state to other states. We use a log value to make sure the smaller SCI score are also visible. The user can change months to see the progress of the COVID cases over time.
 """)
 covid_tableau_html = """
-<div class='tableauPlaceholder' id='viz1744597949361' style='position: relative; margin: 0 auto; width: 1620px;'>
+<div class='tableauPlaceholder' id='viz1744597949361' style='position: relative; margin: 0 auto; width: 1000px;'>
     <noscript>
         <a href='#'><img alt='Main ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;CO&#47;COVIDvsSCI&#47;Main&#47;1_rss.png' style='border: none' /></a>
     </noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
