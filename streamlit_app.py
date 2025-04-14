@@ -15,7 +15,8 @@ from src.trade_heatmap import display_trade_sci_heatmap
 import pycountry
 import traceback
 from src.sci_map_explorer import display_sci_map_explorer
-
+from us_mig_sci import render_us_sci_map
+from worldmapmigration import render_world_sci_map
 st.set_page_config(
     page_title="Ties That Bind",
     page_icon="🌐",
@@ -65,6 +66,16 @@ with st.expander("About SCI"):
     The Social Connectedness Index (SCI) measures the strength of connectedness between 
     geographic areas as represented by social network friendships.
     """)
+
+
+st.title("World Migration and SCI Visualization")
+st.markdown("This is a combined visualization of World migration data and social connectedness.")
+render_world_sci_map()
+
+st.title("US Migration and SCI Visualization")
+st.markdown("This is a combined visualization of United States migration data and social connectedness.")
+render_us_sci_map()
+
 
 st.markdown("### Message Passing Simulator")
 st.write("Select a country to see how it plays a role in connecting the world.")
