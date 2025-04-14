@@ -7,4 +7,4 @@ pycountry
 gspread>=6.2.0
 oauth2client
 streamlit_plotly_events
-numpy>=1.23.0
+numpy>=1.23.0scipy
