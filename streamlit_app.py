@@ -262,13 +262,15 @@ except Exception as e:
 
 
 try:
+    get_immigration_lime()
+except Exception as e:
+    st.error(f"Error loading Immigration Lime: {e}")
+
+try:
     get_sci_network_visual()
 except Exception as e:
     st.error(f"Error loading SCI Network: {e}")
 
 
-try:
-    get_immigration_lime()
-except Exception as e:
-    st.error(f"Error loading Immigration Lime: {e}")
+
 
