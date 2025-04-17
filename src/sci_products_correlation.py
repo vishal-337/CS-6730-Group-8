@@ -27,7 +27,7 @@ def get_sci_trade_correlation_plot():
 
     limit = 18
     data_path = os.path.join('data', 'correlation_by_product.csv')
-    df = pd.read_csv()
+    df = pd.read_csv(data_path)
     df = df.nlargest(limit, 'correlation')
 
     # Build the scatter trace
