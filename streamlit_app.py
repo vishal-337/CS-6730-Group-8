@@ -68,12 +68,33 @@ with st.expander("About SCI"):
     """)
 
 
-st.title("World Migration and SCI Visualization")
-st.markdown("This is a combined visualization of World migration data and social connectedness.")
+st.title("Migration and SCI Visualization")
+st.markdown("### What do these visualizations show?")
+st.markdown("These visualizations show the relationsip between SCI and migration trends within the US and the world. From these, we can hope to identify ways that SCI and migration positively or negatively correlate.")
+st.markdown("### Why is this important?")
+st.markdown("We want to explore how SCI and migration are related.")
+
+st.markdown("These are combined visualizations of World/US migration data and social connectedness where we explore the correlation through color representation of low/high sci and migration trends. Do people tend to move places where there are stronger social ties? Where do we see strong social ties but low migration or vice versa and what opportunties for connections, migrations, and more are in such places?")
+
+#bullets
+
+st.markdown("""
+    
+    **How to read the visualization:**
+    *   The color of the countries/states show the correlation between SCI and migration
+
+    *   The color of the countries/states show the correlation between SCI and migration
+    *   Refer to legends for color representation
+    *   Hover over regions for data information
+    
+    """)
+
 render_world_sci_map()
 
 st.title("US Migration and SCI Visualization")
+
 st.markdown("This is a combined visualization of United States migration data and social connectedness.")
+
 render_us_sci_map()
 
 

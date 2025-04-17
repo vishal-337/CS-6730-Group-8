@@ -29,6 +29,7 @@ def render_world_sci_map():
     df = load_data()
 
     st.markdown("### Global SCI vs Migration Map")
+    st.markdown("This is a combined visualization of World migration data and social connectedness.")
 
     country_options = {
         iso3: name
