@@ -79,8 +79,8 @@ def get_immigration_lime():
 
     st.markdown(f"**Origin:** {origin}  ")
     st.markdown(f"**Destination:** {destination}  ")
-    st.markdown(f"**Actual Export:** {actual_exp:,.0f}  ")
-    st.markdown(f"**Predicted Export:** {pred_exp:,.0f}")
+    # st.markdown(f"**Actual Export:** {actual_exp:,.0f}  ")
+    # st.markdown(f"**Predicted Export:** {pred_exp:,.0f}")
     
     print('feature_cols',feature_cols)  
     
