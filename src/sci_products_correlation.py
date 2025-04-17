@@ -79,12 +79,3 @@ def get_sci_trade_correlation_plot():
 
 
     st.plotly_chart(fig, use_container_width=True)
-    st.markdown("""
-    <div style="display: flex; align-items: center; justify-content: center; margin-top: 15px; font-size: 0.9em;">
-        <span style="margin-right: 10px; color: blue;">Low SCI</span>
-        <div style="width: 250px; height: 15px; background: linear-gradient(to right, blue, purple, red); border-radius: 5px;"></div>
-        <span style="margin-left: 10px; color: red;">High SCI</span>
-    </div>
-    <div style="text-align: center; font-size: 0.8em; color: grey; margin-top: 5px;">
-    </div>
-    """, unsafe_allow_html=True) 
