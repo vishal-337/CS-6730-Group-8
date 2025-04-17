@@ -51,7 +51,6 @@ display_sci_map_explorer()
 st.markdown("---")
 
 st.markdown("### Message Passing Simulator")
-st.write("Select a country to see how it plays a role in connecting the world.")
 st.markdown("""
 # Message Passing Simulator
 
