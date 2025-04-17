@@ -49,89 +49,11 @@ st.markdown("---")
 display_sci_map_explorer()
 
 st.markdown("---")
-
+st.markdown("<h2 style='text-align: center;'>Message Passing Simulator</h2>", unsafe_allow_html=True)
 st.markdown("""
-## Message Passing Simulator
 
 This interactive visualization models how a **message** (or any piece of information) spreads through a network over discrete time steps. Each node represents an individual (or entity), and each edge represents a potential communication link. As the simulation runs, you'll see how quickly—and how far—a message propagates depending on the network structure and your chosen parameters.
 """)
-
-st.markdown("---")
-
-
-st.title("Migration and SCI Visualization")
-st.markdown("### What do these visualizations show?")
-st.markdown("These visualizations show the relationsip between SCI and migration trends within the US and the world. From these, we can hope to identify ways that SCI and migration positively or negatively correlate.")
-st.markdown("### Why is this important?")
-st.markdown("We want to explore how SCI and migration are related.")
-
-st.markdown("These are combined visualizations of World/US migration data and social connectedness where we explore the correlation through color representation of low/high sci and migration trends. Do people tend to move places where there are stronger social ties? Where do we see strong social ties but low migration or vice versa and what opportunties for connections, migrations, and more are in such places?")
-
-#bullets
-
-st.markdown("""
-    
-    **How to read the visualization:**
-    *   The color of the countries/states show the correlation between SCI and migration
-
-    *   The color of the countries/states show the correlation between SCI and migration
-    *   Refer to legends for color representation
-    *   Hover over regions for data information
-    
-    """)
-
-render_world_sci_map()
-
-st.title("US Migration and SCI Visualization")
-
-st.markdown("This is a combined visualization of United States migration data and social connectedness.")
-
-render_us_sci_map()
-
-st.markdown("""
-### Why is this important?
-
-- **Understand diffusion dynamics**  
-  Observe patterns and tipping points of information spread—vital for viral marketing, rumor control, or epidemiology.
-
-- **Compare Different Counties as Starting Points**  
-  Evaluate how different countries affect cascade speed and coverage.
-
-- **Identify critical thresholds**  
-  Discover the propagation probability or network density at which a slow trickle becomes a global cascade.
-""")
-st.markdown("---")
-
-st.markdown("""
-### Parameters
-
-
-Use the sidebar controls to tweak these settings before or during the simulation:
-
-
-- **Passing Probability**  
-  Chance that an informed node successfully passes the message to each neighbor per iteration.
-
-- **Activation Threshold** *(optional)*  
-  Minimum number of information passes required for a node to switch from "uninformed" to "informed."
-
-- **Number of Iterations**  
-  How many discrete time steps the simulation will run. You can pause, advance step-by-step, or animate continuously.
-""")
-st.markdown("---")
-
-st.markdown("""
-### How to read the visualization
-
-- **Node Colors**  
-  - **Purple**: Uninformed  
-  - **Gradient (e.g., Purple → Yellow)**: Indicates if the country reached activation threshold
-
-- **Time Slider & Controls**  
-  - **Play/Pause**: Animate the cascade in real time.  
-  - **Step Forward/Back**: Manually advance through discrete time steps.
-""")
-st.markdown("---")
 
 st.markdown("""
 By experimenting with these settings, you can explore scenarios where information either fizzles out or explodes into a full‑blown cascade. Try adjusting the propagation probability just above the critical value—you'll often witness a dramatic shift from "no spread" to "network‑wide adoption."  
@@ -176,6 +98,80 @@ if st.button('Reset'):
     st.rerun()
 
 st.markdown("---")
+
+st.markdown("<h2 style='text-align: center;'>Migration and SCI Visualization</h2>", unsafe_allow_html=True)
+st.markdown("### What do these visualizations show?")
+st.markdown("These visualizations show the relationsip between SCI and migration trends within the US and the world. From these, we can hope to identify ways that SCI and migration positively or negatively correlate.")
+st.markdown("### Why is this important?")
+st.markdown("We want to explore how SCI and migration are related.")
+
+st.markdown("These are combined visualizations of World/US migration data and social connectedness where we explore the correlation through color representation of low/high sci and migration trends. Do people tend to move places where there are stronger social ties? Where do we see strong social ties but low migration or vice versa and what opportunties for connections, migrations, and more are in such places?")
+
+#bullets
+
+st.markdown("""
+    
+    **How to read the visualization:**
+    *   The color of the countries/states show the correlation between SCI and migration
+
+    *   The color of the countries/states show the correlation between SCI and migration
+    *   Refer to legends for color representation
+    *   Hover over regions for data information
+    
+    """)
+
+render_world_sci_map(key_suffix="section1")
+st.markdown("<h2 style='text-align: center;'>US Migration and SCI Visualization</h2>", unsafe_allow_html=True)
+
+st.markdown("This is a combined visualization of United States migration data and social connectedness.")
+
+
+st.markdown("""
+### Why is this important?
+
+- **Understand diffusion dynamics**  
+  Observe patterns and tipping points of information spread—vital for viral marketing, rumor control, or epidemiology.
+
+- **Compare Different Counties as Starting Points**  
+  Evaluate how different countries affect cascade speed and coverage.
+
+- **Identify critical thresholds**  
+  Discover the propagation probability or network density at which a slow trickle becomes a global cascade.
+""")
+
+
+st.markdown("""
+### Parameters
+
+
+Use the sidebar controls to tweak these settings before or during the simulation:
+
+
+- **Passing Probability**  
+  Chance that an informed node successfully passes the message to each neighbor per iteration.
+
+- **Activation Threshold** *(optional)*  
+  Minimum number of information passes required for a node to switch from "uninformed" to "informed."
+
+- **Number of Iterations**  
+  How many discrete time steps the simulation will run. You can pause, advance step-by-step, or animate continuously.
+""")
+
+st.markdown("""
+### How to read the visualization
+
+- **Node Colors**  
+  - **Purple**: Uninformed  
+  - **Gradient (e.g., Purple → Yellow)**: Indicates if the country reached activation threshold
+
+- **Time Slider & Controls**  
+  - **Play/Pause**: Animate the cascade in real time.  
+  - **Step Forward/Back**: Manually advance through discrete time steps.
+""")
+render_us_sci_map()
+st.markdown("---")
+
+
 st.markdown("<h1 style='text-align: center;'>COVID Data vs SCI</h1>", unsafe_allow_html=True)
 
 st.markdown("""
@@ -223,15 +219,7 @@ covid_tableau_html = """
 </script>
 """
 components.html(covid_tableau_html, height=800)
-st.markdown("---")
-st.markdown("<h1 style='text-align: center;'>World Migration and SCI Visualization</h1>", unsafe_allow_html=True)
-st.markdown("This is a combined visualization of World migration data and social connectedness.")
-render_world_sci_map()
 
-st.markdown("---")
-st.markdown("<h1 style='text-align: center;'>US Migration and SCI Visualization</h1>", unsafe_allow_html=True)
-st.markdown("This is a combined visualization of United States migration data and social connectedness.")
-render_us_sci_map()
 
 st.markdown("---")
 st.markdown("<h1 style='text-align: center;'>Trade and Social Connectedness Analysis</h1>", unsafe_allow_html=True)

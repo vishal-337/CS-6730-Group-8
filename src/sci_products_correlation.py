@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 def get_sci_trade_correlation_plot():
-    st.markdown("### Correlation of Specific Product Trade Flows & Social Connectedness")
+    st.markdown("<h1 style='text-align: center;'>Correlation of Specific Product Trade Flows & Social Connectedness</h1>", unsafe_allow_html=True)
 
     # Add explanatory text
     st.markdown("""

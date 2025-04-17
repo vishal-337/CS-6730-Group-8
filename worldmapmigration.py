@@ -25,7 +25,7 @@ def load_data():
 
     return df
 
-def render_world_sci_map():
+def render_world_sci_map(key_suffix):
     df = load_data()
 
     st.markdown("### Global SCI vs Migration Map")
@@ -37,10 +37,12 @@ def render_world_sci_map():
         if iso3 is not None
     }
 
+    selectbox_key = f"world_map_select_iso_{key_suffix}"
     selected_iso = st.selectbox(
         "Select a country",
         options=list(country_options.keys()),
-        format_func=lambda x: country_options.get(x, "Unknown")
+        format_func=lambda x: country_options.get(x, "Unknown"),
+        key=selectbox_key
     )
 
     if not selected_iso:
