@@ -18,7 +18,7 @@ from src.sci_map_explorer import display_sci_map_explorer
 from us_mig_sci import render_us_sci_map
 from worldmapmigration import render_world_sci_map
 from src.sci_products_correlation import get_sci_trade_correlation_plot
-from src.sci_network import get_sci_network
+from src.sci_network import get_sci_network_visual
 st.set_page_config(
     page_title="Ties That Bind",
     page_icon="🌐",
@@ -188,7 +188,7 @@ except Exception as e:
 
 
 try:
-    get_sci_network()
+    get_sci_network_visual()
 except Exception as e:
     st.error(f"Error loading SCI Network: {e}")
 
