@@ -54,7 +54,7 @@ def get_sci_trade_correlation_plot():
             dtick=0.025,          
             gridwidth=0.5,
             gridcolor='lightgray'
-        )
+        ),
     )
 
     fig.update_yaxes(
@@ -66,7 +66,6 @@ def get_sci_trade_correlation_plot():
         dtick=1,
         automargin=True,
         categoryorder='total ascending',
-        ticklabelbgcolor='white'
     )
 
     fig.update_layout(
