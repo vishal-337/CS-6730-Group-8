@@ -52,6 +52,56 @@ st.markdown("---")
 
 st.markdown("### Message Passing Simulator")
 st.write("Select a country to see how it plays a role in connecting the world.")
+st.markdown("""
+# Message Passing Simulator
+
+This interactive visualization models how a **message** (or any piece of information) spreads through a network over discrete time steps. Each node represents an individual (or entity), and each edge represents a potential communication link. As the simulation runs, you’ll see how quickly—and how far—a message propagates depending on the network structure and your chosen parameters.
+
+---
+
+## Why is this important?
+
+- **Understand diffusion dynamics**  
+  Observe patterns and tipping points of information spread—vital for viral marketing, rumor control, or epidemiology.
+
+- **Compare Different Counties as Starting Points**  
+  Evaluate how different countries affect cascade speed and coverage.
+
+- **Identify critical thresholds**  
+  Discover the propagation probability or network density at which a slow trickle becomes a global cascade.
+
+---
+
+## Parameters
+
+Use the sidebar controls to tweak these settings before or during the simulation:
+
+
+- **Passing Probability**  
+  Chance that an informed node successfully passes the message to each neighbor per iteration.
+
+- **Activation Threshold** *(optional)*  
+  Minimum number of information passes required for a node to switch from “uninformed” to “informed.”
+
+- **Number of Iterations**  
+  How many discrete time steps the simulation will run. You can pause, advance step-by-step, or animate continuously.
+
+---
+
+## How to read the visualization
+
+- **Node Colors**  
+  - **Purple**: Uninformed  
+  - **Gradient (e.g., Purple → Yellow)**: Indicates if the country reached activation threshold
+
+- **Time Slider & Controls**  
+  - **Play/Pause**: Animate the cascade in real time.  
+  - **Step Forward/Back**: Manually advance through discrete time steps.
+
+---
+
+By experimenting with these settings, you can explore scenarios where information either fizzles out or explodes into a full‑blown cascade. Try adjusting the propagation probability just above the critical value—you’ll often witness a dramatic shift from “no spread” to “network‑wide adoption.”  
+""")
 delta_t = 50
 at = 100
 
