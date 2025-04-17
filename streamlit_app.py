@@ -53,9 +53,10 @@ st.markdown("---")
 st.markdown("""
 ## Message Passing Simulator
 
-This interactive visualization models how a **message** (or any piece of information) spreads through a network over discrete time steps. Each node represents an individual (or entity), and each edge represents a potential communication link. As the simulation runs, you’ll see how quickly—and how far—a message propagates depending on the network structure and your chosen parameters.
+This interactive visualization models how a **message** (or any piece of information) spreads through a network over discrete time steps. Each node represents an individual (or entity), and each edge represents a potential communication link. As the simulation runs, you'll see how quickly—and how far—a message propagates depending on the network structure and your chosen parameters.
+""")
 
----
+st.markdown("---")
 
 
 st.title("Migration and SCI Visualization")
@@ -87,6 +88,7 @@ st.markdown("This is a combined visualization of United States migration data an
 
 render_us_sci_map()
 
+st.markdown("""
 ### Why is this important?
 
 - **Understand diffusion dynamics**  
@@ -97,9 +99,10 @@ render_us_sci_map()
 
 - **Identify critical thresholds**  
   Discover the propagation probability or network density at which a slow trickle becomes a global cascade.
+""")
+st.markdown("---")
 
----
-
+st.markdown("""
 ### Parameters
 
 
@@ -110,13 +113,14 @@ Use the sidebar controls to tweak these settings before or during the simulation
   Chance that an informed node successfully passes the message to each neighbor per iteration.
 
 - **Activation Threshold** *(optional)*  
-  Minimum number of information passes required for a node to switch from “uninformed” to “informed.”
+  Minimum number of information passes required for a node to switch from "uninformed" to "informed."
 
 - **Number of Iterations**  
   How many discrete time steps the simulation will run. You can pause, advance step-by-step, or animate continuously.
+""")
+st.markdown("---")
 
----
-
+st.markdown("""
 ### How to read the visualization
 
 - **Node Colors**  
@@ -126,10 +130,11 @@ Use the sidebar controls to tweak these settings before or during the simulation
 - **Time Slider & Controls**  
   - **Play/Pause**: Animate the cascade in real time.  
   - **Step Forward/Back**: Manually advance through discrete time steps.
+""")
+st.markdown("---")
 
----
-
-By experimenting with these settings, you can explore scenarios where information either fizzles out or explodes into a full‑blown cascade. Try adjusting the propagation probability just above the critical value—you’ll often witness a dramatic shift from “no spread” to “network‑wide adoption.”  
+st.markdown("""
+By experimenting with these settings, you can explore scenarios where information either fizzles out or explodes into a full‑blown cascade. Try adjusting the propagation probability just above the critical value—you'll often witness a dramatic shift from "no spread" to "network‑wide adoption."  
 """)
 delta_t = 50
 at = 100
