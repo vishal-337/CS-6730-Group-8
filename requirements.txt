@@ -10,4 +10,4 @@ streamlit_plotly_events
 numpy>=1.23.0
 scipy
 pyvis
-community
+python-louvain
