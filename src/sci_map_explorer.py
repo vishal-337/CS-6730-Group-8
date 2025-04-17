@@ -4,6 +4,7 @@ import plotly.express as px
 import pycountry
 import traceback
 import plotly.graph_objects as go
+import numpy as np
 
 @st.cache_data
 def load_country_name_map():
@@ -109,23 +110,27 @@ def display_sci_map_explorer():
             filtered_data['scaled_sci'] = pd.to_numeric(filtered_data['scaled_sci'], errors='coerce')
             filtered_data.dropna(subset=['scaled_sci'], inplace=True)
 
+            # Calculate log of scaled_sci (using log1p for handling potential zeros)
+            filtered_data['log_scaled_sci'] = np.log1p(filtered_data['scaled_sci'])
+
             if not filtered_data.empty:
                 try:
                     fig_map = px.choropleth(
                         filtered_data,
                         locations="fr_loc_alpha3",
-                        color="scaled_sci",
+                        color="log_scaled_sci",
                         hover_name="fr_loc_name",
                         hover_data={
                             "fr_loc_name": True,
                             "scaled_sci": True,
+                            "log_scaled_sci": False,
                             "fr_loc_alpha3": False,
                             "fr_loc_alpha2": False,
                         },
                         locationmode='ISO-3',
                         color_continuous_scale=px.colors.sequential.Plasma,
                         title=f"Social Connectedness from {display_title_name}",
-                        labels={'scaled_sci': 'Scaled SCI', 'fr_loc_name': 'Country'}
+                        labels={'log_scaled_sci': 'Log Scaled SCI', 'fr_loc_name': 'Country', 'scaled_sci': 'Scaled SCI'}
                     )
 
                     if not origin_data.empty and 'user_loc_alpha3' in origin_data.columns and not origin_data['user_loc_alpha3'].isnull().all():
