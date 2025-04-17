@@ -62,7 +62,7 @@ with mpi_col2:
 with mpi_col3:
     at = st.number_input(label="Enter Activation Threshold",value=100,min_value=1,max_value=1000,step=1,)
 
-projection_ops = ['equirectangular',  'orthographic', 'natural earth', 'conic equidistant', 'stereographic']
+projection_ops = ['orthographic', 'equirectangular', 'natural earth', 'conic equidistant', 'stereographic']
 projection_choice = st.selectbox(
     label="Pick an option",
     options=projection_ops
