@@ -112,6 +112,37 @@ def make_pyvis_html(G: nx.Graph) -> str:
 def get_sci_network_visual():
     st.title("Sparse‑View SCI Network with Live Physics")
 
+    st.markdown("""
+    ## Network Visualization with Louvain, K-Core, and Top-K Algorithms
+
+    This visualization employs three key graph algorithms—**Louvain Community Detection**, **K-Core Decomposition**, and **Top-K Subgraph Extraction**—to analyze and display the structure of a network based on trade data.
+
+    ### Why is this important?
+
+    These algorithms help uncover hidden patterns and structures within complex networks:
+
+    - **Louvain Community Detection**: Identifies groups of nodes (countries) that are more densely connected to each other than to the rest of the network, revealing natural clusters or communities.
+
+    - **K-Core Decomposition**: Finds the most connected subgraphs by removing nodes with fewer than 'k' connections, helping to highlight the core structure of the network.
+
+    - **Top-K Subgraph Extraction**: Focuses on the 'k' most significant connections for each node, allowing for a simplified view of the network's most influential relationships.
+
+    By applying these algorithms, we can gain insights into the most influential countries in trade and how they are interconnected.
+
+    ### How to read the visualization:
+
+    - **Nodes**: Represent countries involved in trade.
+
+    - **Edges**: Represent trade relationships between countries, with thickness indicating the strength of the trade connection.
+
+    - **Colors**: Indicate different communities identified by the Louvain algorithm.
+
+    - **Interactivity**: Hover over nodes and edges to view detailed information about each country and trade relationship.
+
+    This interactive visualization allows users to explore the global trade network, identify key players, and understand the structure of international trade relationships.
+
+    """)
+
     data_path = os.path.join('data','Country_Names_SCI.csv')
     df = load_and_preprocess(data_path)
 

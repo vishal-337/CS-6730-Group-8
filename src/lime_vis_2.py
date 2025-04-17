@@ -43,13 +43,34 @@ def load_and_train(data_path: str):
 
 def get_immigration_lime():
     st.title("Migration Volume Prediction & LIME Explorer")
+
+
     data_path = os.path.join("data", "migration_trade_products_sci_df_hs96.csv")
     if not data_path:
         st.stop()
     
+
     df, test_idx, X_train, X_test, y_train, y_test, feature_cols, rf = load_and_train(data_path)
     r2 = rf.score(X_test, y_test)
-    st.subheader("Model Performance")
+    st.subheader("Random Forest Model Performance")
+    st.markdown("""
+    ## Local Explanation Metadata Visualization
+
+    This visualization displays the local explanations associated with machine learning model predictions, highlighting how individual features influence specific outcomes.
+
+    ### Why is this important?
+
+    Understanding local explanations is crucial for interpreting model behavior on a granular level. By examining how each feature contributes to a particular prediction, we can identify which aspects of the input data are most influential. This transparency helps in validating model decisions, ensuring fairness, and building trust in automated systems.
+
+    ### How to read the visualization:
+
+    - **X-Axis**: Represents the magnitude of feature contributions to the prediction.
+    - **Y-Axis**: Lists the individual features considered by the model.
+    - **Color Coding**: Indicates the direction of influence (e.g., red for positive impact, blue for negative impact).
+
+    By analyzing this visualization, users can pinpoint which features are driving specific predictions, facilitating a deeper understanding of the model's decision-making process.
+
+    """)
     st.write(f"Test R²: **{r2:.3f}**")
     
     # importances = pd.Series(rf.feature_importances_, index=feature_cols)
