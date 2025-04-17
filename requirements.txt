@@ -11,3 +11,4 @@ numpy>=1.23.0
 scipy
 pyvis
 python-louvain
+lime
