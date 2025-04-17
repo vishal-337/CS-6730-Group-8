@@ -5,6 +5,7 @@ import networkx as nx
 import community as community_louvain
 from pyvis.network import Network
 import itertools
+import os
 
 @st.cache_data(show_spinner=False)
 def load_and_preprocess(path: str) -> pd.DataFrame:
@@ -111,7 +112,7 @@ def make_pyvis_html(G: nx.Graph) -> str:
 def get_sci_network_visual():
     st.title("Sparse‑View SCI Network with Live Physics")
 
-    data_path = '/mnt/c/Users/cnikh/Projects/DataVis/data/Country_Names_SCI.csv'
+    data_path = os.path.join('data','Country_Names_SCI.csv')
     df = load_and_preprocess(data_path)
 
     top_k    = st.slider("Keep Top‑K edges per node", 1, 20, 5)
