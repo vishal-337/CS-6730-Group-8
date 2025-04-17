@@ -17,6 +17,7 @@ import traceback
 from src.sci_map_explorer import display_sci_map_explorer
 from us_mig_sci import render_us_sci_map
 from worldmapmigration import render_world_sci_map
+from src.sci_products_correlation import get_sci_trade_correlation_plot
 st.set_page_config(
     page_title="Ties That Bind",
     page_icon="🌐",
@@ -177,6 +178,12 @@ if not sp_trade_sci_df.empty:
 else:
     st.warning("Could not load data required for the Trade/SCI Heatmap.")
 
+
+
+try:
+    get_sci_trade_correlation_plot()
+except Exception as e:
+    st.error(f"Error loading SCI Trade Correlation Plot: {e}")
 
 
 
