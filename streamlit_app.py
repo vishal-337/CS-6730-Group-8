@@ -50,15 +50,14 @@ display_sci_map_explorer()
 
 st.markdown("---")
 
-st.markdown("### Message Passing Simulator")
 st.markdown("""
-# Message Passing Simulator
+## Message Passing Simulator
 
 This interactive visualization models how a **message** (or any piece of information) spreads through a network over discrete time steps. Each node represents an individual (or entity), and each edge represents a potential communication link. As the simulation runs, you’ll see how quickly—and how far—a message propagates depending on the network structure and your chosen parameters.
 
 ---
 
-## Why is this important?
+### Why is this important?
 
 - **Understand diffusion dynamics**  
   Observe patterns and tipping points of information spread—vital for viral marketing, rumor control, or epidemiology.
@@ -71,7 +70,7 @@ This interactive visualization models how a **message** (or any piece of informa
 
 ---
 
-## Parameters
+### Parameters
 
 Use the sidebar controls to tweak these settings before or during the simulation:
 
@@ -87,7 +86,7 @@ Use the sidebar controls to tweak these settings before or during the simulation
 
 ---
 
-## How to read the visualization
+### How to read the visualization
 
 - **Node Colors**  
   - **Purple**: Uninformed  
