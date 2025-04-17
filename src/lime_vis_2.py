@@ -42,7 +42,7 @@ def load_and_train(data_path: str):
     return df, test_idx, X_train, X_test, y_train, y_test, feature_cols, rf
 
 def get_immigration_lime():
-    st.title("Export Volume Prediction & LIME Explorer")
+    st.title("Migration Volume Prediction & LIME Explorer")
     data_path = os.path.join("data", "migration_trade_products_sci_df_hs96.csv")
     if not data_path:
         st.stop()
